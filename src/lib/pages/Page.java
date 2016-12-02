@@ -1,5 +1,6 @@
 package lib.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.server.browserlaunchers.Sleeper;
@@ -11,46 +12,40 @@ public class Page {
 	protected WebDriver _driver;
 	//private String url;
 	
-	
-	
+	//================= Mapping web elements ===============
 	@FindBy(id = "menu-item-158")
 	private WebElement aboutUsLink;
 	
-	@FindBy(xpath = "id('menu-item-155')")
+	@FindBy(xpath = "id('menu-item-155')")	
 	private WebElement servicesLink;
-	
-	//@FindBy(xpath = "id('post-156')//h1")
-	//private WebElement aboutUsHeader;
+
+	//==================================================
 	
 	@FindBy(id = "menu-item-374")
 	private WebElement registrationLink;
 	
-	//WebDriver driver;
 	
+	// Constructor initializing web driver
+	// And initializing web elements on current page
 	public Page(WebDriver driver){
 		this._driver = driver;
 		PageFactory.initElements(_driver, this);
 	}
 	
-	public RegistrationPage clickOnRegistrationLink(){
+	
+	/*
+	 * clickOn Methods
+	 */
+	public RegistrationPage clickOnRegistrationLink() {
 		registrationLink.click();
 		Sleeper.sleepTightInSeconds(2);
 		return new RegistrationPage(_driver);
+		//return page
 	}
 	
-	public AboutUs clickOnAboutUsLink(){
+	public AboutUsPage clickOnAboutUsLink() {
 		aboutUsLink.click();
 		Sleeper.sleepTightInSeconds(2);
-		return new AboutUs(_driver);
+		return new AboutUsPage(_driver);
 	}
-	
-	//public void clickOnAboutUsLink(){
-	//	aboutUsLink.click();
-	//}
-	
-	//public String getTextAboutUs(){
-	//	String text = aboutUsHeader.getText();
-	//	return text;
-	//}
-	
 }
